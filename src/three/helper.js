@@ -1,18 +1,18 @@
 import * as THREE from "three";
 import { scene } from "./setup";
-
-const gridsize = 10000;
-const gridDivisions = 100;
+import settings from "./variables/settings";
+const { gridSize, gridDivisions } = settings;
+console.log(settings ,settings.gridDivision)
 function displayCoards() {
   scene.add(new THREE.AxesHelper(20));
-  scene.add(new THREE.GridHelper(gridsize, gridDivisions, "green", "green"));
+  scene.add(new THREE.GridHelper(gridSize, gridDivisions, "green", "green"));
   scene.add(
-    new THREE.GridHelper(gridsize, gridDivisions, "blue", "blue").rotateX(
+    new THREE.GridHelper(gridSize, gridDivisions, "blue", "blue").rotateX(
       Math.PI / 2
     )
   );
   scene.add(
-    new THREE.GridHelper(gridsize, gridDivisions, "red", "red").rotateZ(
+    new THREE.GridHelper(gridSize, gridDivisions, "red", "red").rotateZ(
       Math.PI / 2
     )
   );
