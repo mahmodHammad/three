@@ -27,7 +27,7 @@ function render() {
 
 // ----------------------------------------------> scene
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x000000);
+scene.background = new THREE.Color(0xffffff);
 
 // ----------------------------------------------> camera
 const camera = new THREE.PerspectiveCamera(
