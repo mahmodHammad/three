@@ -8,20 +8,20 @@ import wheel from "./models/wheel.glb"
 let model= undefined
 
 function AddLine(start, end, color = "#000000") {
-  const LinesGroup = new THREE.Group();
   const material = new MeshLineMaterial({
-    lineWidth: 0.01,
+    lineWidth: 0.001,
     resolution: new THREE.Vector2(window.innerWidth, window.innerHeight),
     color: new THREE.Color(color),
     sizeAttenuation : true
   });
   const line = new MeshLine();
+  const LinesGroup = new THREE.Group();
 
-  line.setVertices([new THREE.Vector3(0,0,0),new THREE.Vector3(10,10,10)]);
+  line.setVertices([start, end]);
   let mesh = new THREE.Mesh(line, material);
   LinesGroup.add(mesh);
-  
-  return mesh;
+
+  return LinesGroup;
 
 }
 
@@ -71,10 +71,15 @@ const addToScene = () => {
     scene.add(model)
   }
   )
- let line =  AddLine( new THREE.Vector3(0,0,0), new THREE.Vector3(20,2,2))
+
+
+  var labelsGroup = new THREE.Group();
+  labelsGroup.name = "arrows";
+ let line =  AddLine( new THREE.Vector3(0,0,0), new THREE.Vector3(20,2,2),"#333",[])
   console.log("LL",line)
  
-  scene.add(line)
+  labelsGroup.add(line)
+  scene.add(labelsGroup)
 };
 
 export { addToScene,model };
