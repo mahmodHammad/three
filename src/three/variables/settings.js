@@ -1,6 +1,9 @@
 export default {
-  ctrlSpeed: 6,
-  quality: 1,
+  quality: 2,
+  enableAntialias:false,
+  ctrlSpeed: 2,
+  enableDamping:true,
+  dampingFactor:0.1,
   maxZoom: 10000,
   minZoom: 0.4,
   maxPolarAngle: 4,
@@ -13,6 +16,4 @@ export default {
   voicePitch: 1,
   voiceLevel: 1,
   developmentModel: true,
-  gridSize: 1000,
-  gridDivision: 1000,
 };

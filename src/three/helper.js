@@ -1,9 +1,8 @@
 import * as THREE from "three";
 import { scene } from "./setup";
 import settings from "./variables/settings";
-const { gridSize, gridDivisions } = settings;
 console.log(settings ,settings.gridDivision)
-function displayCoards() {
+function displayCoards(  gridSize =100,gridDivisions =100) {
   scene.add(new THREE.AxesHelper(20));
   scene.add(new THREE.GridHelper(gridSize, gridDivisions, "green", "green"));
   scene.add(

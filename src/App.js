@@ -1,10 +1,16 @@
-import Home from "./Home";
-function App() {
+import React, {useEffect, useRef } from "react";
+import { sceneSetup } from "./three/setup";
+import { startAnimationLoop } from "./three/Animate";
+
+export default function App() {
+  const Target = useRef(null);
+
+  useEffect(() => {
+    sceneSetup( Target.current);
+    startAnimationLoop();
+  }, []);
+
   return (
-    <div>
-      <Home />
-    </div>
+      <div ref={Target} className="canvas"></div>
   );
 }
-
-export default App;

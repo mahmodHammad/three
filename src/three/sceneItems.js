@@ -22,7 +22,8 @@ function addBox(position){
   scene.add(mesh)
 }
 
-const addItem = () => {
+// Any thing will be added to scene should be done here
+const addToScene = () => {
   addLights();
 
   // Testing boxes
@@ -34,4 +35,4 @@ const addItem = () => {
     
 };
 
-export { addItem };
+export { addToScene };
