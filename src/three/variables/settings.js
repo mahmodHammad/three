@@ -8,7 +8,7 @@ export default {
   minZoom: 0.4,
   maxPolarAngle: 4,
   minPolarAngle: 0,
-  autoRotate: false,
+  autoRotate: true,
   autoRotateSpeed: 5,
   cameraTweenSpeed: 1500,
   TargetTweenSpeed: 2000,

@@ -77,7 +77,7 @@ const sceneSetup = (root) => {
   window.addEventListener("resize", handleWindowResize);
 
   if (settings.developmentModel) {
-    displayCoards(100,100);
+    displayCoards(100,10);
     stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
     document.body.appendChild(stats.dom);
   }
