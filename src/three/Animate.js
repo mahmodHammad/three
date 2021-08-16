@@ -22,7 +22,7 @@ const startAnimationLoop = (e) => {
   // console.log(clock.elapsedTime)
   stats.begin();
   generalTime = clock.elapsedTime;
-  rotateWheel()
+  // rotateWheel()
   render();
   
   controls.update();
