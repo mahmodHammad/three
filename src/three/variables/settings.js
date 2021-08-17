@@ -1,7 +1,7 @@
 export default {
   quality: 2,
-  enableAntialias:true,
-  ctrlSpeed: 2,
+  enableAntialias:false,
+  ctrlSpeed: 1,
   enableDamping:true,
   dampingFactor:0.1,
   maxZoom: 10000,

@@ -17,6 +17,7 @@ const renderer = new THREE.WebGLRenderer({
   alpha: true,
   powerPreference: "high-performance",
   antialias: settings.enableAntialias,
+  logarithmicDepthBuffer:false
 });
 renderer.setPixelRatio(settings.quality);
 
@@ -26,7 +27,7 @@ function render() {
 
 // ----------------------------------------------> scene
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xffffff);
+scene.background = new THREE.Color(0x000000);
 
 // ----------------------------------------------> camera
 const camera = new THREE.PerspectiveCamera(
@@ -35,7 +36,7 @@ const camera = new THREE.PerspectiveCamera(
   0.001, // near plane
   80000 // far plane
 );
-camera.position.set(0, 10, 80);
+camera.position.set(-5, 2, -5);
 
 // ----------------------------------------------> controls
 const controls = new OrbitControls(camera, renderer.domElement);

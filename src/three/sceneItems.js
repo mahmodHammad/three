@@ -4,12 +4,12 @@ import { loadModel } from "./ModelLoader";
 import {makeTextSprite} from "./drawText"
 import { MeshLine, MeshLineMaterial, MeshLineRaycast } from "threejs-meshline";
 
-import wheel from "./models/wheel.glb"
+import wheel from "./models/table.glb"
 let model= undefined
 
 function AddLine(start, end, color = "#000000") {
   const material = new MeshLineMaterial({
-    lineWidth: 0.001,
+    lineWidth: 0.1,
     resolution: new THREE.Vector2(window.innerWidth, window.innerHeight),
     color: new THREE.Color(color),
     sizeAttenuation : true
@@ -26,10 +26,10 @@ function AddLine(start, end, color = "#000000") {
 }
 
 function addLights() {
-  const amplight = new THREE.AmbientLight("#ffffff", 1);
-  let lightBack = new THREE.SpotLight(0xffffff, 0.2);
-  let lightFront = new THREE.SpotLight(0xffffff, 0.2);
-  let PointLight = new THREE.PointLight(0xffffff, 0.9);
+  const amplight = new THREE.AmbientLight("#ffffff", 0.9);
+  let lightBack = new THREE.SpotLight(0xff9900, 0.6);
+  let lightFront = new THREE.SpotLight(0x00ffff, 0.8);
+  let PointLight = new THREE.PointLight(0xffffff, 1);
   lightBack.position.set(2, 50, -7);
   lightFront.position.set(-2, -30, 7);
   PointLight.position.set(10, 0, 20);
@@ -40,19 +40,11 @@ function addLights() {
   scene.add(PointLight)
 }
 
-function addBox(position){
-  const box = new THREE.BoxGeometry(4*Math.random(),4*Math.random(),4*Math.random())
-  const material = new THREE.MeshStandardMaterial({color:0xffffff*Math.random()})
-  const mesh = new THREE.Mesh(box,material)
-  mesh.position.fromArray(position)
-  scene.add(mesh)
-}
-
 // Any thing will be added to scene should be done here
 const addToScene = () => {
   addLights();
   loadModel(wheel).then(glb=>{
-    model = glb.getChildByName("Cube")
+    model = glb
     var text2d = makeTextSprite(
       "Hello",
       "#333",
@@ -68,6 +60,7 @@ const addToScene = () => {
     scene.add(text2d)
     console.log(model)
     model.position.set(0, 0, 0)
+    model.scale.set(0.001,0.001,0.001)
     scene.add(model)
   }
   )
