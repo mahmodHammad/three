@@ -1,5 +1,5 @@
 export default {
-  quality: 2,
+  quality: 0.7,
   enableAntialias:false,
   ctrlSpeed: 1,
   enableDamping:true,
@@ -15,5 +15,5 @@ export default {
   voiceSpeed: 1,
   voicePitch: 1,
   voiceLevel: 1,
-  developmentModel: false,
+  developmentModel: true,
 };

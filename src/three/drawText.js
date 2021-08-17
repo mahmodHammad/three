@@ -270,7 +270,7 @@ function makeTextSprite(
   target,
   scale=1.24
 ) {
-  var myText = new SpriteText(text, 20, color, undefined, target, "label");
+  var myText = new SpriteText(text, 10, color, undefined, target, "label");
   myText.backgroundColor = backgroundColor;
   myText.padding = padding;
   myText.fontWeight = fontweight;

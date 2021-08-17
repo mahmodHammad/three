@@ -18,7 +18,7 @@ function loadModel(filepath) {
         resolve(gltf.scene);
       },
       function (xhr) {
-        console.log("loading", xhr);
+        // console.log("loading", xhr);
       },
       function (error) {
         console.log("ERROR on loading model", error);
