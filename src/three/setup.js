@@ -92,6 +92,7 @@ export {
   scene,
   controls,
   render,
+  renderer,
   camera,
   stats,
 };

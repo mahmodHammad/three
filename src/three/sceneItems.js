@@ -2,24 +2,25 @@ import * as THREE from "three";
 import { scene } from "./setup";
 import { loadModel } from "./ModelLoader";
 import {makeTextSprite} from "./drawText"
+import {setHDRLighting} from "./panorama"
 import { MeshLine, MeshLineMaterial, MeshLineRaycast } from "threejs-meshline";
 
 import wheel from "./models/table.glb"
 let model= undefined
 
 function addLights() {
-  const amplight = new THREE.AmbientLight("#ffffff", 0.7);
-  let lightBack = new THREE.SpotLight(0xff9900, 0.6);
-  let lightFront = new THREE.SpotLight(0x00ffff, 0.8);
-  let PointLight = new THREE.PointLight(0xffffff, 1);
+  const amplight = new THREE.AmbientLight("#ffffff", 0.2);
+  let lightBack = new THREE.SpotLight(0xff9900, 0.2);
+  let lightFront = new THREE.SpotLight(0x00ffff, 0.2);
+  let PointLight = new THREE.PointLight(0xffffff, 0.2);
   lightBack.position.set(2, 50, -7);
   lightFront.position.set(-2, -30, 7);
   PointLight.position.set(10, 0, 20);
 
   scene.add(amplight);
-  // scene.add(lightBack);
-  // scene.add(lightFront);
-  // scene.add(PointLight)
+  scene.add(lightBack);
+  scene.add(lightFront);
+  scene.add(PointLight)
 }
 
 function AddLine(start, end, color = "#000000") {
@@ -38,7 +39,7 @@ function AddLine(start, end, color = "#000000") {
 function addAnnotation(targets, name){
  let test = [
    {start:[0,8,0],end:[5,13,2],color:"#f94",name:"Table"},
-   {start:[-13,5,0],end:[-10,10,1],color:"#f94",name:"Chair"},
+   {start:[-13,5,0],end:[-12,10,1],color:"#f94",name:"Chair"},
 ]
  test.forEach(target => {
     let { start, end,color,name } =target
@@ -87,6 +88,7 @@ function addLable({x,y,z},target){
 const addToScene = () => {
   addLights();
   addAnnotation()
+  setHDRLighting()
   loadModel(wheel).then(glb=>{
     model = glb
     console.log(model)
