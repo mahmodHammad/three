@@ -89,10 +89,21 @@ const addToScene = () => {
   addLights();
   addAnnotation()
   setHDRLighting()
-  // const gm = new THREE.BoxGeometry(1,1,1)
-  // const mat = new THREE.MeshStandardMaterial()
-  // const mesh = new THREE.Mesh(gm,mat)
-  // scene.add(mesh)
+  const gm = new THREE.BoxGeometry(1,1,1)
+  const mat = new THREE.MeshStandardMaterial()
+  const mesh = new THREE.Mesh(gm,mat)
+  mesh.position.set(-2,-2,-2)
+  scene.add(mesh)
+
+  const mesh2 = new THREE.Mesh(gm,mat)
+  mesh2.position.set(1,1,2)
+  scene.add(mesh2)
+  
+  const mesh3 = new THREE.Mesh(gm,mat)
+  mesh3.position.set(0,0,1)
+  scene.add(mesh3)
+  
+
   loadModel(wheel).then(glb=>{
     model = glb
     console.log(model)
