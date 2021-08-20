@@ -15,5 +15,5 @@ export default {
   voiceSpeed: 1,
   voicePitch: 1,
   voiceLevel: 1,
-  developmentModel: false,
+  developmentModel: 0,
 };

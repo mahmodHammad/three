@@ -25,7 +25,7 @@ function addLights() {
 
 function AddLine(start, end, color = "#000000") {
   const material = new MeshLineMaterial({
-    lineWidth: 0.07,
+    lineWidth: 0.004,
     resolution: new THREE.Vector2(window.innerWidth, window.innerHeight),
     color: new THREE.Color(color),
     sizeAttenuation : true
@@ -38,8 +38,8 @@ function AddLine(start, end, color = "#000000") {
 
 function addAnnotation(targets, name){
  let test = [
-   {start:[0,8,0],end:[5,13,2],color:"#f94",name:"Table"},
-   {start:[-13,5,0],end:[-12,10,1],color:"#f94",name:"Chair"},
+   {start:[0,0,0],end:[1,1.1,1.2],color:"#f94",name:"Table"},
+   {start:[-1.03,0.0,0],end:[-1.2,1.5,1],color:"#f94",name:"Chair"},
 ]
  test.forEach(target => {
     let { start, end,color,name } =target
@@ -78,9 +78,9 @@ function addLable({x,y,z},target){
     1.5,
     target.color,
     "target",
-     50
+     5
   );
-  text2d.position.set(x , y+0.7 , z)
+  text2d.position.set(x , y+0.06 , z)
   return text2d
 }
 
@@ -89,10 +89,14 @@ const addToScene = () => {
   addLights();
   addAnnotation()
   setHDRLighting()
+  // const gm = new THREE.BoxGeometry(1,1,1)
+  // const mat = new THREE.MeshStandardMaterial()
+  // const mesh = new THREE.Mesh(gm,mat)
+  // scene.add(mesh)
   loadModel(wheel).then(glb=>{
     model = glb
     console.log(model)
-    model.position.set(0, 0, 0)
+    model.position.set(0, -0.5, 0)
     model.scale.set(0.0007,0.0007,0.0007)
     scene.add(model)
   }
