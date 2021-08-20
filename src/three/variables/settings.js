@@ -1,6 +1,6 @@
 export default {
-  quality: 2,
-  enableAntialias:true,
+  quality: 0.7,
+  enableAntialias:false,
   ctrlSpeed: 1,
   enableDamping:true,
   dampingFactor:0.1,

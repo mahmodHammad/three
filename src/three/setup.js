@@ -4,6 +4,7 @@ import { displayCoards } from "./helper.js";
 import settings from "./variables/settings.js";
 import Stats from "stats-js";
 import {addToScene} from "./sceneItems"
+import {ARButton} from "./ARButton"
 
 THREE.Cache.enabled = true;
 
@@ -17,7 +18,8 @@ const renderer = new THREE.WebGLRenderer({
   alpha: true,
   powerPreference: "high-performance",
   antialias: settings.enableAntialias,
-  logarithmicDepthBuffer:false
+  logarithmicDepthBuffer:false,
+  
 });
 renderer.setPixelRatio(settings.quality);
 
@@ -27,7 +29,7 @@ function render() {
 
 // ----------------------------------------------> scene
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x000000);
+// scene.background = new THREE.Color(0x000000);
 
 // ----------------------------------------------> camera
 const camera = new THREE.PerspectiveCamera(
@@ -74,6 +76,8 @@ const handleWindowResize = () => {
 // ----------------------------------------------> setup
 const sceneSetup = (root) => {
   renderer.setSize(width, height);
+  renderer.xr.enabled=true
+  new ARButton(renderer)
   root.appendChild(renderer.domElement);
   window.addEventListener("resize", handleWindowResize);
 

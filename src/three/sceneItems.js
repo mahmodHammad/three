@@ -93,7 +93,7 @@ const addToScene = () => {
     model = glb
     console.log(model)
     model.position.set(0, 0, 0)
-    model.scale.set(0.01,0.01,0.01)
+    model.scale.set(0.0007,0.0007,0.0007)
     scene.add(model)
   }
   )
