@@ -1,5 +1,5 @@
 export default {
-  quality: 0.7,
+  quality: 2,
   enableAntialias:false,
   ctrlSpeed: 1,
   enableDamping:true,
