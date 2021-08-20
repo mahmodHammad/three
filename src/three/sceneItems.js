@@ -94,7 +94,7 @@ const addToScene = () => {
   const mesh = new THREE.Mesh(gm,mat)
   mesh.position.set(-2,-2,-2)
   scene.add(mesh)
-
+// 166106217
   const mesh2 = new THREE.Mesh(gm,mat)
   mesh2.position.set(1,1,2)
   scene.add(mesh2)
@@ -109,7 +109,7 @@ const addToScene = () => {
     console.log(model)
     model.position.set(0, -0.5, 0)
     model.scale.set(0.0007,0.0007,0.0007)
-    scene.add(model)
+    // scene.add(model)
   }
   )
 };
