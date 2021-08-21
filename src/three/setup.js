@@ -4,8 +4,7 @@ import { displayCoards } from "./helper.js";
 import settings from "./variables/settings.js";
 import Stats from "stats-js";
 import {addToScene} from "./sceneItems"
-import {ARButton} from "./ARButton"
-
+import {ARButton} from "three/examples/jsm/webxr/ARButton"
 THREE.Cache.enabled = true;
 
 const stats = new Stats();
@@ -77,7 +76,9 @@ const handleWindowResize = () => {
 const sceneSetup = (root) => {
   renderer.setSize(width, height);
   renderer.xr.enabled=true
-  new ARButton(renderer)
+document.body.appendChild( ARButton.createButton( renderer ) );
+
+  // new ARButton(renderer)
   root.appendChild(renderer.domElement);
   window.addEventListener("resize", handleWindowResize);
 
