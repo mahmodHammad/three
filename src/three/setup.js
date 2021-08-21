@@ -1,96 +1,86 @@
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { displayCoards } from "./helper.js";
-import settings from "./variables/settings.js";
-import Stats from "stats-js";
-import {addToScene} from "./sceneItems"
-import {ARButton} from "three/examples/jsm/webxr/ARButton"
-THREE.Cache.enabled = true;
+import * as THREE from 'three/build/three.module.js';
+import { ARButton } from 'three/examples/jsm/webxr/ARButton.js';
 
-const stats = new Stats();
+let camera, scene, renderer;
+let controller;
 
-// For 100% width&Height
-let width = window.innerWidth;
-let height = window.innerHeight;
-// ----------------------------------------------> render
-const renderer = new THREE.WebGLRenderer({
-  alpha: true,
-  powerPreference: "high-performance",
-  antialias: settings.enableAntialias,
-  logarithmicDepthBuffer:false,
-  
-});
-renderer.setPixelRatio(settings.quality);
+// init();
 
-function render() {
-  renderer.render(scene, camera);
-}
+function sceneSetup() {
 
-// ----------------------------------------------> scene
-const scene = new THREE.Scene();
-// scene.background = new THREE.Color(0x000000);
+  const container = document.createElement( 'div' );
+  document.body.appendChild( container );
 
-// ----------------------------------------------> camera
-const camera = new THREE.PerspectiveCamera(
-  40, // fov = field of view
-  width / height, // aspect ratio
-  0.001, // near plane
-  80000 // far plane
-);
-camera.position.set(5, 6, 10);
+  scene = new THREE.Scene();
 
-// ----------------------------------------------> controls
-const controls = new OrbitControls(camera, renderer.domElement);
-function setupControls() {
-  controls.target = new THREE.Vector3(0, -0.5, 0);
-  const{ctrlSpeed ,maxZoom,minZoom,maxPolarAngle,minPolarAngle,autoRotate,autoRotateSpeed,enableDamping,dampingFactor}=settings
+  camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 20 );
 
-  controls.zoomSpeed = ctrlSpeed;
-  controls.panSpeed = ctrlSpeed;
-  controls.rotateSpeed = ctrlSpeed;
+  const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
+  light.position.set( 0.5, 1, 0.25 );
+  scene.add( light );
 
-  controls.maxDistance = maxZoom;
-  controls.minDistance = minZoom;
+  //
 
-  controls.maxPolarAngle = maxPolarAngle;
-  controls.minPolarAngle = minPolarAngle;
+  renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+  renderer.setPixelRatio( window.devicePixelRatio );
+  renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.xr.enabled = true;
+  container.appendChild( renderer.domElement );
 
-  controls.autoRotate = autoRotate;
-  controls.autoRotateSpeed = autoRotateSpeed;
+  //
 
-  controls.enableDamping = enableDamping;
-  controls.dampingFactor =dampingFactor;
-}
+  document.body.appendChild( ARButton.createButton( renderer ) );
 
-// ----------------------------------------------> resize
-const handleWindowResize = () => {
-  width = window.innerWidth;
-  height = window.innerHeight;
+  //
 
-  renderer.setSize(width, height);
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
-};
+  const geometry = new THREE.CylinderGeometry( 0, 0.05, 0.2, 32 ).rotateX( Math.PI / 2 );
 
-// ----------------------------------------------> setup
-const sceneSetup = (root) => {
-  renderer.setSize(width, height);
-  renderer.xr.enabled=true
-document.body.appendChild( ARButton.createButton( renderer ) );
+  function onSelect() {
 
-  // new ARButton(renderer)
-  root.appendChild(renderer.domElement);
-  window.addEventListener("resize", handleWindowResize);
+    const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
+    const mesh = new THREE.Mesh( geometry, material );
+    mesh.position.set( 0, 0, - 0.3 ).applyMatrix4( controller.matrixWorld );
+    mesh.quaternion.setFromRotationMatrix( controller.matrixWorld );
+    scene.add( mesh );
 
-  if (settings.developmentModel) {
-    displayCoards(100,100);
-    stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-    document.body.appendChild(stats.dom);
   }
 
-  setupControls();
-  addToScene()
-};
+  controller = renderer.xr.getController( 0 );
+  controller.addEventListener( 'select', onSelect );
+  scene.add( controller );
+
+  //
+
+  window.addEventListener( 'resize', onWindowResize );
+animate();
+
+
+}
+
+function onWindowResize() {
+
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize( window.innerWidth, window.innerHeight );
+
+}
+
+//
+
+function animate() {
+
+  renderer.setAnimationLoop( render );
+
+}
+
+function render() {
+
+  renderer.render( scene, camera );
+
+}
+
+let controls,stats
 
 export {
   sceneSetup,

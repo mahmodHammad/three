@@ -7,7 +7,7 @@ export default function App() {
 
   useEffect(() => {
     sceneSetup( Target.current);
-    startAnimationLoop();
+    // startAnimationLoop();
   }, []);
 
   return (
